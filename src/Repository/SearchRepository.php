@@ -16,20 +16,17 @@ class SearchRepository extends ServiceEntityRepository
         parent::__construct($registry, Search::class);
     }
 
-    //    /**
-    //     * @return Search[] Returns an array of Search objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       /**
+        * @return Search[] Retourne la liste des recherches par ordre de temps (plus récente à plus anciennes)
+        */
+       public function findAllByTimeOrder(): array
+       {
+           return $this->createQueryBuilder('s')
+               ->orderBy('s.searchDate', 'DESC')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Search
     //    {
