@@ -1,9 +1,12 @@
 <script setup>
+    import { ref } from 'vue';
 
+    const hello = ref('hello lama')
+     
 </script>
 
 <template>
-    <div>Welcome lamastico</div>
+    <div>{{ hello }}</div>
 </template>
 
 <style scoped>
