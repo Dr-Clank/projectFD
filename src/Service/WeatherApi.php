@@ -13,7 +13,14 @@ class WeatherApi
         $this->client = $client;
     }
 
-
+    /**
+     * Récupère les informations d'une ville comme ces coordonnées et son pays
+     *
+     * @param string $cityName  Nom de la ville a recherché
+     * 
+     * @return array Retourne un tableau de valeurs contenant la villes et ces coordonnées. 
+     * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
+     */ 
     function GetCityInfos(string $cityName) : array {
         
         $cityName = str_replace(" ", "-", $cityName );
@@ -27,8 +34,15 @@ class WeatherApi
         return $content;
     }
 
+    /**
+     * Récupère les informations métérologique d'une ville à partir du nom de la ville
+     *
+     * @param string $cityName  Nom de la ville a recherché
+     * 
+     * @return array Retourne un tableau contenant pour chaque heure la température, le vent, l'humidité (pluie) et la densité nuageuse
+     * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
+     */ 
     function GetWeatherInfosFromCity(string $cityName) : array {
-
 
         $content = $this->GetCityInfos($cityName);
         if($content["is_empty"] != true){
@@ -37,6 +51,15 @@ class WeatherApi
         return $content;
     }
 
+    /**
+     * Récupère les informations métérologique d'une paire de coordonnées
+     *
+     * @param string $x  Latitude
+     * @param string $y  Longitude
+     * 
+     * @return array Retourne un tableau contenant pour chaque heure la température, le vent, l'humidité (pluie) et la densité nuageuse
+     * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
+     */ 
     function GetWeatherInfosFromCoordinate(string $x, string $y) : array {
 
         $requete = $this->client->request(
@@ -48,6 +71,14 @@ class WeatherApi
         return $content;
     }
 
+    /**
+     * Extrait les informations métérologiques nécéssaires à partir du contenue de la requêtes
+     *
+     * @param string $content   Contenue Json retourné par une requête
+     * 
+     * @return array Retourne un tableau contenant pour chaque heure la température, le vent, l'humidité (pluie) et la densité nuageuse
+     * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
+     */
     function ExtractWeatherContentFromApi(string $content) : array {   
         
         $result = [];
@@ -79,6 +110,14 @@ class WeatherApi
         return $result;
     }
     
+    /**
+     * Extrait les informations d'une ville nécéssaires à partir du contenue de la requêtes
+     *
+     * @param string $content   Contenue Json retourné par une requête
+     * 
+     * @return array Retourne un tableau contenant le nom, les coordonnées et le pays où se trouve la ville.
+     * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
+     */
     public function ExtractCityContentFromApi(string $content): array
     {   
         
