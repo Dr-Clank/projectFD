@@ -21,9 +21,6 @@ class Search
     private ?string $longitude = null;
 
     #[ORM\Column]
-    private ?int $prevision = null;
-
-    #[ORM\Column]
     private ?\DateTime $searchDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -54,18 +51,6 @@ class Search
     public function setLongitude(string $longitude): static
     {
         $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    public function getPrevision(): ?int
-    {
-        return $this->prevision;
-    }
-
-    public function setPrevision(int $prevision): static
-    {
-        $this->prevision = $prevision;
 
         return $this;
     }

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Nouvelle recherche</h1>
+
+{{ form_start(form) }}
+    {{ form_row(form.latitude, {'label': 'Latitude'}) }}
+    {{ form_row(form.longitude, {'label': 'Latitude'}) }}
+    {{ form_row(form.city) }}
+    
+    {{ form_row(form.save) }}
+{{ form_end(form) }}
+
+{% endblock %}

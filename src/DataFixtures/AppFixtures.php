@@ -14,7 +14,6 @@ class AppFixtures extends Fixture
         $product1 = new Search();
         $product1->setLatitude('47,3167');
         $product1->setLongitude('5,0167');
-        $product1->setPrevision(3);
         $product1->setSearchDate(new DateTime());
         $product1->setCity('Dijon');
         
@@ -23,7 +22,6 @@ class AppFixtures extends Fixture
         $product2 = new Search();
         $product2->setLatitude('40,7143');
         $product2->setLongitude('-74,006');
-        $product2->setPrevision(3);
         $product2->setSearchDate((new DateTime())->modify('-1 day'));
         $product2->setCity('New york');
 
