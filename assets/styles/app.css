@@ -6,9 +6,14 @@ body {
     margin-top: 4%;
     margin-left: 2%;
     margin-right: 2%;
+    background-color: white;
 }
 
 #main-title {
+    text-align: center;
+}
+
+#info-main{
     text-align: center;
 }
 
@@ -17,4 +22,126 @@ h1 {
     font-weight: 400;
     font-style: normal;
     font-size: 50px;
+}
+
+#horizontal-split {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#horizontal-split div {
+    text-align: center;
+    width: 50%;
+    margin: 2%;
+}
+#horizontal-split div a {
+    text-align: center;
+    margin: 5%;
+}
+
+p {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.button {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #04AA6D;
+  color: white;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  font-size: 28px;
+}
+
+.search-form{
+    justify-content: center;
+    margin: 3%;
+}
+
+#add-search-body{
+    margin: 3%;
+    width: 300px;
+}
+
+#add-search-body div{
+    margin: 1%;
+    margin-bottom: 1rem;
+}
+
+#search_save {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #04AA6D;
+  color: white;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  font-size: 20px;
+}
+
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left; 
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.form-group .input {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.form-group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.form-group li {
+    color: red;
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+}
+
+.form-group small {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.alert-danger {
+    color: #b00020;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    background-color: #fdecea;
+    border: 1px solid #f5c2c7;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }

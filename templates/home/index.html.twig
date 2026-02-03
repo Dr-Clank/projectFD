@@ -4,6 +4,17 @@
     <div id='main-title'>
         <h1>Bienvenue sur Projet Météo FourData</h1>
     </div>
-    
-    <div id='vue-app'></div>
+    <div id='horizontal-split'>
+        <div>
+            <p>Pour commencer une recherche météo</p>
+            <a class='button' href="{{ path('create_search') }}">Rechercher</a>
+        </div>
+        <div>
+            <p>Pour revenir sur des anciennes recherches</p>
+            <a class='button' href="{{ path('searchs') }}">Historique</a>
+        </div>
+    </div>
+
+    <div id='vue-app'>
+    </div>
 {% endblock %}

@@ -2,11 +2,11 @@
     import { ref } from 'vue';
 
     const hello = ref('hello lama')
-     
+    //Ne sert à rien
 </script>
 
 <template>
-    <div>{{ hello }}</div>
+
 </template>
 
 <style scoped>
