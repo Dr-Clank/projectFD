@@ -11,7 +11,7 @@ class HelloController extends AbstractController{
 
     #[Route('/')]
     public function index(WeatherApi $weatherApi){
-        dd($weatherApi->GetWeatherInfosFromCity("Aix les bains"));
+        $weatherApi->GetWeatherInfosFromCity("Aix les bains");
 
         return  $this->render('home/index.html.twig');
     }
