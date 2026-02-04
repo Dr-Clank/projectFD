@@ -14,7 +14,9 @@ php bin/console d:m:m
 ## Lancer l'application
 symfony serve
 
-## Pour arrêter l'application
+## rendez-vous à l'adresse `https://127.0.0.1:8000/`
+
+### Pour arrêter l'application
 symfony server:stop
 
 ### Pour un jeu de tests
