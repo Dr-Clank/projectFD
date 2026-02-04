@@ -21,7 +21,7 @@ class WeatherApi
      * @return array Retourne un tableau de valeurs contenant la villes et ces coordonnées. 
      * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
      */ 
-    function GetCityInfos(string $cityName) : array {
+    function getCityInfos(string $cityName) : array {
         
         $cityName = str_replace(" ", "-", $cityName );
         
@@ -42,11 +42,11 @@ class WeatherApi
      * @return array Retourne un tableau contenant pour chaque heure la température, le vent, l'humidité (pluie) et la densité nuageuse
      * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
      */ 
-    function GetWeatherInfosFromCity(string $cityName) : array {
+    function getWeatherInfosFromCity(string $cityName) : array {
 
-        $content = $this->GetCityInfos($cityName);
+        $content = $this->getCityInfos($cityName);
         if($content["is_empty"] != true){
-            $content = $this->GetWeatherInfosFromCoordinate($content["latitude"], $content["longitude"]);
+            $content = $this->getWeatherInfosFromCoordinate($content["latitude"], $content["longitude"]);
         }
         return $content;
     }
@@ -60,7 +60,7 @@ class WeatherApi
      * @return array Retourne un tableau contenant pour chaque heure la température, le vent, l'humidité (pluie) et la densité nuageuse
      * Si aucune ne sont trouvé renvoie un tableau avec ["is_empty" => true]
      */ 
-    function GetWeatherInfosFromCoordinate(string $x, string $y) : array {
+    function getWeatherInfosFromCoordinate(string $x, string $y) : array {
 
         $requete = $this->client->request(
             'GET',
@@ -139,4 +139,50 @@ class WeatherApi
         }
         return $result;
     }
+
+    function getDailyAverages($hourlyData) {
+        $result = [];
+
+        // Heures fixes pour lesquelles on veut la moyenne
+        $targetHours = ['00:00', '06:00', '12:00', '18:00'];
+
+        foreach ($hourlyData as $datetime => $data) {
+            // On sépare la date et l'heure
+            $date = substr($datetime, 0, 10); // YYYY-MM-DD
+            $hour = substr($datetime, 11, 5); // HH:MM
+
+            // On ne garde que les heures cibles
+            if (in_array($hour, $targetHours)) {
+                if (!isset($result[$date][$hour])) {
+                    $result[$date][$hour] = ['temperature' => 0, 'rain' => 0, 'cloud' => 0, 'wind' => 0, 'count' => 0];
+                }
+
+                // On accumule les valeurs
+                $result[$date][$hour]['temperature'] += $data['temperature'];
+                $result[$date][$hour]['rain'] += $data['rain'];
+                $result[$date][$hour]['cloud'] += $data['cloud'];
+                $result[$date][$hour]['wind'] += $data['wind'];
+                $result[$date][$hour]['count'] += 1;
+            }
+        }
+
+        // Calcul des moyennes
+        foreach ($result as $date => $hours) {
+            foreach ($hours as $hour => $values) {
+                $count = $values['count'];
+                if ($count > 0) {
+                    $result[$date][$hour]['temperature'] = round($values['temperature'] / $count, 1);
+                    $result[$date][$hour]['rain'] = round($values['rain'] / $count, 1);
+                    $result[$date][$hour]['cloud'] = round($values['cloud'] / $count, 1);
+                    $result[$date][$hour]['wind'] = round($values['wind'] / $count, 1);
+                }
+
+                // On peut retirer le compteur pour simplifier le tableau final
+                unset($result[$date][$hour]['count']);
+            }
+        }
+
+        return $result;
+    }
+
 }

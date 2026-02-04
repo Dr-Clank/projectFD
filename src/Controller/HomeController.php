@@ -11,7 +11,7 @@ class HomeController extends AbstractController{
 
     #[Route('/', name: 'home')]
     public function index(WeatherApi $weatherApi){
-        $weatherApi->GetWeatherInfosFromCity("Aix les bains");
+        $weatherApi->getWeatherInfosFromCity("Aix les bains");
 
         return  $this->render('home/index.html.twig');
     }

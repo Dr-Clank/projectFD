@@ -5,7 +5,10 @@
     <h1>Nouvelle recherche</h1> 
 </div>
 <div id='info-main'>
-    <p>Vous pouvez chercher météo sur 7 jours : en cherchant avec le nom d'une ville ou soit avec des coordonnées !</p>
+    <p>Vous pouvez chercher la météo sur 7 jours : en cherchant avec le nom d'une ville ou soit avec des coordonnées !</p>
+</div>
+<div id='info-main'>
+    <p>Si tous les champs sont remplie, seul la Ville sera prise en compte</p>
 </div>
 {% for message in app.flashes('error') %}
     <div class="alert-danger">

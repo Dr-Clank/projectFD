@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\SearchRepository;
 use App\Form\SearchType;
+use App\Service\WeatherApi;
 use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,26 +28,27 @@ class SearchController extends AbstractController
 
 
     #[Route('/search/{id<\d+>}', name: 'get_search')]
-    public function getSearch(SearchRepository $repository, $id): Response
+    public function getSearch(SearchRepository $repository, $id, WeatherApi $weatherApi): Response
     {
         $search = $repository->findOneBy(['id' => $id]);
-        dump($search);
+        
+        $hourlyData = $weatherApi->getWeatherInfosFromCoordinate($search->getLatitude(), $search->getLongitude());
+        $dailyAverages = $weatherApi->getDailyAverages($hourlyData);
 
         if ($search === null) {
-            throw $this->createNotFoundException('Historique de recherche non trouvé.');
+            throw $this->createNotFoundException('Recherche non trouvé.');
         }
-
-
-
+        
         //getSearch.html.twig à créer
-        return $this->render('search/index.html.twig', [
+        return $this->render('search/getsearch.html.twig', [
             'search' => $search,
+            'dailyAverages' => $dailyAverages
         ]);
     }
 
 
     #[Route('/search/add', name: 'create_search')]
-    public function addSearch(Request $request, EntityManagerInterface $manager): Response
+    public function addSearch(Request $request, EntityManagerInterface $manager, WeatherApi $weatherApi): Response
     {
         $search = new Search;
 
@@ -58,12 +60,17 @@ class SearchController extends AbstractController
             $search->setCity(trim($search->getCity()));
             $search->setLatitude(trim($search->getLatitude()));
             $search->setLongitude(trim($search->getLongitude()));
-            if (
-                empty($search->getCity()) &&
-                (empty($search->getLongitude()) || empty($search->getLatitude()))
-            ) {
+
+            //Vérifie si le formulaire contient bien une ville ou une Longitude + Latitude
+            if (empty($search->getCity()) && (empty($search->getLongitude()) || empty($search->getLatitude()))) {
                 $this->addFlash('error', 'Vous devez renseigner une ville OU une longitude et une latitude.');
             } else {
+                $searchTemp = $weatherApi->getCityInfos($search->getCity());
+                
+                if($searchTemp['is_empty'] != true){
+                    $search->setLatitude($searchTemp['latitude']);
+                    $search->setLongitude($searchTemp['longitude']);
+                }
                 $search->setSearchDate(new DateTime());
                 $manager->persist($search);
                 $manager->flush();

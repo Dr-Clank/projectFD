@@ -145,3 +145,39 @@ p {
     border-radius: 4px;
     margin-bottom: 10px;
 }
+
+
+/* Partie tableau d'affichage météo */
+    .weather-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .weather-table th,
+    .weather-table td {
+        border: 1px solid #999;
+        padding: 8px;
+    }
+
+    /* En-tête */
+    .weather-table thead th {
+        background-color: #333;
+        color: #fff;
+    }
+
+    /* Date */
+    .weather-table .date-cell {
+        font-weight: bold;
+        background-color: #f0f0f0;
+    }
+
+    /* Températures par couleur */
+    .weather-table .temp-hot { background-color: #ff9999; }   /* >= 30°C */
+    .weather-table .temp-warm { background-color: #ffcc99; }  /* 25-29°C */
+    .weather-table .temp-mild { background-color: #ffff99; }  /* 20-24°C */
+    .weather-table .temp-cool { background-color: #ccffcc; }  /* 15-19°C */
+    .weather-table .temp-cold { background-color: #99ccff; }  /* <15°C */
+/* fin tableau d'affichage météo */

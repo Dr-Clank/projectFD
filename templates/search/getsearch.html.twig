@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div id='main-title'>
+    {# mettre soit nom ville, soit coordonnées #}
+    <h1>Recherche pour : </h1> 
+</div>
+
+<table class="weather-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Matin (6h)</th>
+            <th>Après-midi (12h)</th>
+            <th>Soir (18h)</th>
+            <th>Nuit (Minuit)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for date, hours in dailyAverages %}
+            <tr>
+                <td class="date-cell">{{ date }}</td>
+                {% for hour in [ '06:00', '12:00', '18:00', '00:00'] %}
+                    {% set data = hours[hour] %}
+                    {% set tempClass = 
+                        data.temperature >= 30 ? 'temp-hot' : 
+                        data.temperature >= 25 ? 'temp-warm' :
+                        data.temperature >= 20 ? 'temp-mild' :
+                        data.temperature >= 15 ? 'temp-cool' : 'temp-cold' 
+                    %}
+                    <td class="hour-cell {{ tempClass }}">
+                        {{ data.temperature }}°C<br>
+                        🌧 {{ data.rain }} mm<br>
+                        ☁ {{ data.cloud }} %<br>
+                        Vent: {{ data.wind }} km/h
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
