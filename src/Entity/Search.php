@@ -12,7 +12,7 @@ class Search
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 9, scale: 6)]
     private ?string $latitude = null;
@@ -26,7 +26,7 @@ class Search
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }

@@ -160,18 +160,27 @@ p {
     .weather-table td {
         border: 1px solid #999;
         padding: 8px;
+        font-family: "Inter", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
     }
 
     /* En-tête */
     .weather-table thead th {
         background-color: #333;
         color: #fff;
+        font-family: "Inter", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
     }
 
     /* Date */
     .weather-table .date-cell {
         font-weight: bold;
         background-color: #f0f0f0;
+        font-family: "Inter", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
     }
 
     /* Températures par couleur */
@@ -180,4 +189,58 @@ p {
     .weather-table .temp-mild { background-color: #ffff99; }  /* 20-24°C */
     .weather-table .temp-cool { background-color: #ccffcc; }  /* 15-19°C */
     .weather-table .temp-cold { background-color: #99ccff; }  /* <15°C */
+
+
+    #return-home {
+        text-align: center;
+        width: 100%;
+        margin: 2%;
+    }
 /* fin tableau d'affichage météo */
+
+/* Partie tableau d'historique de recherche */
+.search-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.search-table th,
+.search-table td {
+    border: 1px solid #999;
+    padding: 8px;
+    text-align: left;
+}
+
+.search-table thead th {
+    background-color: #333;
+    color: #fff;
+}
+
+.search-table thead th {
+    background-color: #333;
+    color: #fff;
+}
+
+.search-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.icon-link {
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 0 5px;
+}
+
+.icon-link.blue i {
+    color: #007bff;
+}
+
+.icon-link.red i {
+    color: #dc3545;
+}
+
+.icon-link:hover i {
+    opacity: 0.8;
+}
+/* fin tableau d'historique de recherche */

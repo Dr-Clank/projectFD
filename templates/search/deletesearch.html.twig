@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}Supprimer{% endblock %}
+
+{% block body %}
+<div id='main-title'>
+    <h1>Supprimer votre recherche ? 
+        {% if search.city is not empty %}
+            {{ search.city }}
+        {% else %}
+            X= {{ search.latitude }},  Y= {{ search.longitude }}
+        {% endif %}
+    </h1> 
+</div>
+
+<form method="post">
+    <button>Oui</button>
+    <a href="{{ path('searchs')}}" >Annulé</a>
+</form>
+
+{% endblock %}

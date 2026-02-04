@@ -19,8 +19,7 @@ class SearchController extends AbstractController
     public function index(SearchRepository $repository): Response
     {
         $searchs = $repository->findAllByTimeOrder();
-        dump($searchs);
-
+        //dd($searchs);
         return $this->render('search/index.html.twig', [
             'searchHistory' => $searchs,
         ]);
@@ -39,7 +38,6 @@ class SearchController extends AbstractController
             throw $this->createNotFoundException('Recherche non trouvé.');
         }
         
-        //getSearch.html.twig à créer
         return $this->render('search/getsearch.html.twig', [
             'search' => $search,
             'dailyAverages' => $dailyAverages
@@ -74,6 +72,7 @@ class SearchController extends AbstractController
                 $search->setSearchDate(new DateTime());
                 $manager->persist($search);
                 $manager->flush();
+                return $this->redirectToRoute('get_search', ['id'=> $search->getId()]);
             }
         }
 
@@ -81,4 +80,28 @@ class SearchController extends AbstractController
             'form' => $form
         ]);
     }
+    
+    #[Route('/search/{id<\d+>}/delete', name: 'delete_search')]
+    public function deleteSearch($id, SearchRepository $repository, EntityManagerInterface $manager, Request $request ): Response
+    {
+        $search = $repository->findOneBy(['id' => $id]);
+
+        if ($search === null) {
+            throw $this->createNotFoundException('Recherche non trouvé.');
+        }
+
+        if($request->isMethod('POST')){
+            $manager->remove($search);
+            $manager->flush();
+
+            $this->addFlash('notice','La recheche à correctement été supprimé.');
+
+            return $this->redirectToRoute('searchs');
+        }
+        
+        return $this->render('search/deletesearch.html.twig', [
+            'search' => $search
+        ]);
+    }
+
 }

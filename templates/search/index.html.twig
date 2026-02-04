@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SearchController!{% endblock %}
+{% block title %}Historique {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div id='main-title'>
+        <h1>Historique de recherche</h1> 
+    </div>
+    <div id='return'>
+        <a class='button' href="{{ path('home') }}">Nouvelle recherche</a>
+    </div>
+    <table class="search-table">
+        <thead>
+            <tr>
+                <th>Recherche</th>
+                <th>Date de recherche</th>
+                <th>Voir</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for search in searchHistory %}
+                <tr>
+                    <td>
+                        {% if search.city is not empty %}
+                            {{ search.city }}
+                        {% else %}
+                            {{ search.latitude }}, {{ search.longitude }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ search.searchDate|date("d/m/Y H:i:s") }}
+                    </td>
+                    <td>
+                        <a href="{{ path('get_search', {'id': search.id }) }}" class="icon-link blue">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </td> 
+                    <td>
+                        <a href="{{ path('get_search', {'id': search.id }) }}" class="icon-link red">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td> 
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<div class="example-wrapper">
-    {# <h1>Hello {{ controller_name }}! ✅</h1> #}
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/projFD/projectFD/src/Controller/SearchController.php</code></li>
-        <li>Your template at <code>C:/projFD/projectFD/templates/search/index.html.twig</code></li>
-    </ul>
-</div>
 {% endblock %}

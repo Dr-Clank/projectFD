@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Recherche{% endblock %}
 {% block body %}
 <div id='main-title'>
-    {# mettre soit nom ville, soit coordonnées #}
-    <h1>Recherche pour : </h1> 
+    <h1>Recherche pour : 
+        {% if search.city is not empty %}
+            {{ search.city }}
+        {% else %}
+            X= {{ search.latitude }},  Y= {{ search.longitude }}
+        {% endif %}
+    </h1> 
+</div>
+<div id='return'>
+    <a class='button' href="{{ path('create_search') }}">Retour au menu</a>
 </div>
 
 <table class="weather-table">
