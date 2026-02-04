@@ -5,16 +5,22 @@
 <div id='main-title'>
     <h1>Supprimer votre recherche ? 
         {% if search.city is not empty %}
-            {{ search.city }}
+            '{{ search.city }}'
         {% else %}
             X= {{ search.latitude }},  Y= {{ search.longitude }}
         {% endif %}
     </h1> 
 </div>
 
-<form method="post">
-    <button>Oui</button>
-    <a href="{{ path('searchs')}}" >Annulé</a>
-</form>
+    <form class method="post">
+<div id='horizontal-split'>
+    <div>
+        <button id='delete-button'>Oui</button>
+    </div>
+    <div>
+        <a class='button' href="{{ path('searchs')}}" >Annulé</a>
+    </div>
+</div>
+    </form>
 
 {% endblock %}
