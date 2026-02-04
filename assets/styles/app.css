@@ -191,7 +191,7 @@ p {
     .weather-table .temp-cold { background-color: #99ccff; }  /* <15°C */
 
 
-    #return-home {
+    #return{
         text-align: center;
         width: 100%;
         margin: 2%;
