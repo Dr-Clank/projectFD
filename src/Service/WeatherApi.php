@@ -140,6 +140,14 @@ class WeatherApi
         return $result;
     }
 
+     /**
+     * Effectue une moyenne journalière des données reçus
+     *
+     * @param string $content   Contenue Json retourné par une requête
+     * 
+     * @return array Retourne un tableau pour chaque horaire précis ('00:00', '06:00', '12:00', '18:00') une moyenne de chaque mesure
+     * 
+     */
     function getDailyAverages($hourlyData) {
         $result = [];
 

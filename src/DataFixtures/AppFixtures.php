@@ -11,6 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        //Créer un jeu de test
         $product1 = new Search();
         $product1->setLatitude('47,3167');
         $product1->setLongitude('5,0167');
