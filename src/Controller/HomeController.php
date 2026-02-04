@@ -10,9 +10,7 @@ use App\Service\WeatherApi;
 class HomeController extends AbstractController{
 
     #[Route('/', name: 'home')]
-    public function index(WeatherApi $weatherApi){
-        $weatherApi->getWeatherInfosFromCity("Aix les bains");
-
+    public function index(){
         return  $this->render('home/index.html.twig');
     }
     

@@ -19,7 +19,7 @@ class SearchController extends AbstractController
     public function index(SearchRepository $repository): Response
     {
         $searchs = $repository->findAllByTimeOrder();
-        //dd($searchs);
+        
         return $this->render('search/index.html.twig', [
             'searchHistory' => $searchs,
         ]);
